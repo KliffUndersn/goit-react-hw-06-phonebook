@@ -4,8 +4,13 @@ import { ContactList } from './ContactList/ContactList';
 import { FilterContacts } from './FilterContacts/FilterContacts';
 import { connect } from 'react-redux';
 import { addContact, deleteContact, filterContact } from '../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
 
-const InputForm = ({ onSubmit, items, onDelete, filter, changiFilter }) => {
+const InputForm = ({ onSubmit, onDelete, changiFilter }) => {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+  const filter = useSelector(state => state.filter);
+  console.log(items);
   const [state, setState] = useState({
     name: '',
     number: '',
@@ -26,7 +31,7 @@ const InputForm = ({ onSubmit, items, onDelete, filter, changiFilter }) => {
       name,
       number,
     };
-    onSubmit(singleContact);
+    dispatch(addContact(singleContact));
   };
   const filterContacts = e => {
     return items.filter(e => e.name.toLowerCase().includes(filter));
@@ -60,21 +65,22 @@ const InputForm = ({ onSubmit, items, onDelete, filter, changiFilter }) => {
 
       <ContactList
         filteredContacts={filterContacts()}
-        deleteContact={onDelete}
+        // deleteContact={onDelete}
       />
     </>
   );
 };
 
-const mapStateToProps = ({ items, filter }) => {
-  return {
-    items,
-    filter,
-  };
-};
-const mapDispatchToProps = dispatch => ({
-  onSubmit: value => dispatch(addContact(value)),
-  onDelete: id => dispatch(deleteContact(id)),
-  changiFilter: ({ target }) => dispatch(filterContact(target.value)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(InputForm);
+// const mapStateToProps = ({ items, filter }) => {
+//   return {
+//     items,
+//     filter,
+//   };
+// };
+// const mapDispatchToProps = dispatch => ({
+//   onSubmit: value => dispatch(addContact(value)),
+//   onDelete: id => dispatch(deleteContact(id)),
+//   changiFilter: ({ target }) => dispatch(filterContact(target.value)),
+// });
+// export default connect(mapStateToProps, mapDispatchToProps)(InputForm);
+export default InputForm;
