@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { filterContact } from '../../redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { filterContact } from '../../../redux/actions';
 
 export const FilterContacts = () => {
   const dispatch = useDispatch();

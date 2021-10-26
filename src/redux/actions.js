@@ -1,4 +1,3 @@
-// import types from './types';
 import { createAction } from '@reduxjs/toolkit';
 
 export const deleteContact = createAction('contacts/delete');

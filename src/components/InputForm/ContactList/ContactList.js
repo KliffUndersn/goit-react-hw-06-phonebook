@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/actions';
+import { deleteContact } from '../../../redux/actions';
 
 export const ContactList = ({ filteredContacts }) => {
-  // console.log(filteredContacts)
   const dispatch = useDispatch();
   return (
     <>

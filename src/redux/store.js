@@ -1,7 +1,4 @@
-// import { createStore } from 'redux';
 import { configureStore, createReducer } from '@reduxjs/toolkit';
-// import types from './types';
-// import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { addContact, deleteContact, filterContact } from './actions';
@@ -26,6 +23,19 @@ const reducer = createReducer(initialStore, {
   },
 });
 
+const contactPercistConfig = {
+  key: 'contacts',
+  storage,
+  blacklist: ['filter'],
+};
+
+const store = configureStore({
+  reducer: persistReducer(contactPercistConfig, reducer),
+});
+
+export const persistor = persistStore(store);
+export default store;
+
 // const reducer = (state = initialStore, action) => {
 //   switch (action.type) {
 //     case types.ADD:
@@ -41,19 +51,8 @@ const reducer = createReducer(initialStore, {
 //       return state;
 //   }
 // };
-const contactPercistConfig = {
-  key: 'contacts',
-  storage,
-  blacklist: ['filter'],
-};
+
 // const store = createStore(
 //   persistReducer(contactPercistConfig, reducer),
 //   composeWithDevTools(),
 // );
-
-const store = configureStore({
-  reducer: persistReducer(contactPercistConfig, reducer),
-});
-
-export const persistor = persistStore(store);
-export default store;
