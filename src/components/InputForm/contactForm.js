@@ -1,21 +1,13 @@
 import { ContactList } from './ContactList/ContactList';
 import { FilterContacts } from './FilterContacts/FilterContacts';
-import { useSelector } from 'react-redux';
 import InputForm from './inputForm/InputForm';
 
 const ContactForm = () => {
-  const items = useSelector(state => state.items);
-  const filter = useSelector(state => state.filter);
-  console.log(items);
-
-  const filterContacts = e => {
-    return items.filter(e => e.name.toLowerCase().includes(filter));
-  };
   return (
     <>
       <InputForm />
       <FilterContacts />
-      <ContactList filteredContacts={filterContacts()} />
+      <ContactList />
     </>
   );
 };
